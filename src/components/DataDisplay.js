@@ -6,7 +6,7 @@ const DataDisplay = (props) => {
    const [weatherData, setWeatherData] = useState("");
    const [location, setLocation] = useState(
        {
-           city: false,
+           city: city,
            lat: 0,
            lon: 0,
        }
@@ -20,8 +20,9 @@ const DataDisplay = (props) => {
                 alert("not supported")
             }
         }
+
         if (city !== ""){
-            setLocation({city: true, lat: location.lat, lon: location.lon});
+            setLocation({city: true, lat: 0, lon: 0});
         }
 
             if (location.city === true || location.lat !== 0){
@@ -46,8 +47,8 @@ const DataDisplay = (props) => {
     },[setLocation, location.city, location.lat, location.lon, city, props])
 
     return (<div>
-        <button onClick={() => {console.log(location)}}>test</button>
-                <img src={weatherData.icon}/>
+        <button onClick={() => {console.log(location)}} >test</button>
+                <img src={weatherData.icon} alt="img of weather"/>
                 <div>{weatherData.cityName}</div>
                 <div>{weatherData.currentTemp}</div>
                 <div>{weatherData.maxTemp}</div>
