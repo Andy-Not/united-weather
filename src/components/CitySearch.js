@@ -11,7 +11,7 @@ const CitySearch = (props) => {
 
     useEffect(() => {
         props.setCitySearch(city)
-    },[city]);
+    },[city,props]);
 
 
     return(
