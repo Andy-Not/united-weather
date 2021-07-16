@@ -13,7 +13,7 @@ const DataDisplay = (props) => {
     useEffect(() => {
         if (props.cityName === "" && location.lat === 0 && location.lon === 0){
             if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(position => setLocation({city: false, lat:position.coords.latitude, lon:position.coords.longitude}));
+                navigator.geolocation.getCurrentPosition(position => setLocation({lat:position.coords.latitude, lon:position.coords.longitude}));
             } else{
                 alert("not supported")
             }
