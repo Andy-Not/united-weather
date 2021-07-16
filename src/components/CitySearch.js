@@ -4,14 +4,16 @@ const CitySearch = (props) => {
     const [city, setCity] = useState("");
     const currentCity = useRef("");
 
+    const {setCitySearch} = props;
+
     const submit = (e) => {
         e.preventDefault();
         setCity(currentCity.current.value)
     }
 
     useEffect(() => {
-        props.setCitySearch(city)
-    },[city,props]);
+        setCitySearch(city);
+    },[city, setCitySearch]);
 
 
     return(
