@@ -1,7 +1,6 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
 const DataDisplay = (props) => {
-
     const [weatherData, setWeatherData] = useState("");
     const [location, setLocation] = useState(
         {
