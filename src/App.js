@@ -10,7 +10,7 @@ function App() {
    const weather = (data) => {
         setWeatherData(data);
    }
-   console.log(weatherData);
+
   return (
             <Card weatherData={weatherData}>
                 <CitySearch setCitySearch={setSeachedCity}/>
