@@ -1,10 +1,15 @@
 import axios from "axios";
 import {useEffect, useState} from "react";
 const Card = (props) => {
-
     const [imgLinks, setImgLinks] = useState("");
+    const [weatherDescription, setWeatherDescription] = useState(
+        {
+            temp: "",
+            description: ""
+        }
+    )
     let bgImgInline = {
-        backgroundImage:`url(${imgLinks.full})`,
+        backgroundImage:`url(${imgLinks.regular})`,
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
         height: "100vh",
@@ -17,7 +22,6 @@ const Card = (props) => {
             console.log(response.data)
             setImgLinks(
                 {
-                    full: response.data.urls.full,
                     regular: response.data.urls.regular
                 }
             );

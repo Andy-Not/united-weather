@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
+import classes from "./styles/datadisplay.module.css";
 const DataDisplay = (props) => {
     const [weatherData, setWeatherData] = useState("");
     const [location, setLocation] = useState(
@@ -8,6 +9,10 @@ const DataDisplay = (props) => {
             lon: 0,
         }
     );
+
+    if (weatherData !== ""){
+    props.passInfo(weatherData);
+    }
 
     useEffect(() => {
         if (props.cityName === "" && location.lat === 0 && location.lon === 0){
@@ -31,22 +36,28 @@ const DataDisplay = (props) => {
                         icon: `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
                         minTemp: response.data.main.temp_min,
                         feels: response.data.main.feels_like,
-                        humidity: response.data.main.humidity
+                        humidity: response.data.main.humidity,
+                        description: response.data.weather[0].description
                     }
                 );
             });
             console.log("call was made!");
         }
     },[location.city, location.lat, location.lon, props.cityName])
+    return (
 
-    return (<div>
-        <button onClick={() => {console.log(location)}} >test</button>
-        <img src={weatherData.icon} alt="img of weather"/>
-        <div>{weatherData.cityName}</div>
-        <div>{weatherData.currentTemp}</div>
-        <div>{weatherData.maxTemp}</div>
-        <div>{weatherData.minTemp}</div>
-        <div>{weatherData.feels}</div>
-    </div>)
+                <div className={classes["info-wrapper"]}>
+                    <h1>{weatherData.cityName}</h1>
+                    <div className={classes["img-wrapper"]}>
+                        <h3>{weatherData.description}</h3>
+                        <img src={weatherData.icon} alt="img of weather"/>
+                    </div>
+
+                <div>{weatherData.currentTemp}</div>
+                <div>{weatherData.maxTemp}</div>
+                <div>{weatherData.minTemp}</div>
+                <div>{weatherData.feels}</div>
+                </div>
+            )
 }
 export default DataDisplay;

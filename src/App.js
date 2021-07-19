@@ -6,11 +6,16 @@ import {useState} from "react";
 
 function App() {
    const [searchedCity, setSeachedCity] =  useState("");
+   const [weatherData, setWeatherData] = useState("");
+   const weather = (data) => {
+        setWeatherData(data);
+   }
+   console.log(weatherData);
   return (
-    <Card>
-        <CitySearch setCitySearch={setSeachedCity}/>
-        <DataDisplay cityName={searchedCity}/>
-    </Card>
+            <Card weatherData={weatherData}>
+                <CitySearch setCitySearch={setSeachedCity}/>
+                <DataDisplay cityName={searchedCity} passInfo={weather}/>
+            </Card>
   );
 }
 

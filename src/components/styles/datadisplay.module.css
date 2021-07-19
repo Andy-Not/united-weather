@@ -1,0 +1,30 @@
+.info-wrapper{
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(72, 97, 109, 0.55);
+    width: 30rem;
+    padding: 2rem;
+    border-radius: 2rem;
+    border: solid black 0.02rem;
+}
+.img-wrapper{
+    background-color: rgb(179, 179, 179);
+    border-radius: 0.4rem;
+    /*border: black solid 0.01rem;*/
+    overflow: hidden;
+    align-self: center;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.img-wrapper h3 {
+    color: #d9d9d9;
+    background-color: rgba(0, 0, 0, 0.41);
+    text-align: center;
+}
+.img-wrapper img {
+    width: 7rem;
+    /*background-color: blue;*/
+    align-self: center;
+}
