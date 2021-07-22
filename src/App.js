@@ -1,15 +1,15 @@
 import './App.css';
-import CitySearch from "./components/CitySearch";
 import DataDisplay from "./components/DataDisplay";
-import {useState} from "react";
+import {useState, Fragment} from "react";
 
 function App() {
    const [searchedCity, setSeachedCity] =  useState("");
+
+
   return (
-    <div>
-        <CitySearch setCitySearch={setSeachedCity}/>
-        <DataDisplay cityName={searchedCity}/>
-    </div>
+            <Fragment>
+                <DataDisplay setCitySearch={setSeachedCity} cityName={searchedCity}/>
+            </Fragment>
   );
 }
 
