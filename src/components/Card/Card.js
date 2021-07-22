@@ -22,9 +22,9 @@ const Card = (props) => {
 
     useEffect(() => {
         let typeOfWeather = "";
-        let
+        let weatherDescription = "";
         // const typeOfweather = ["cold-weather","chill-weather","summer-time","hot-weather"];
-        if (props.weatherData.currentTemp && weatherDescription.temp === ""){
+        if (typeOfWeather === "" && weatherDescription === ""){
             if (props.weatherData.currentTemp <= 40){
                 typeOfWeather = x[0]
                 console.log("cat")
@@ -39,7 +39,7 @@ const Card = (props) => {
                 console.log("bird")
             }
 
-        if (props.weatherData !== "") {
+        if (typeOfWeather !== "") {
             let newUrl = `https://api.unsplash.com/photos/random?query=${typeOfWeather}-with-${""}-clouds&client_id=eAsl8SA-Wai1oX3_Q1jzG0d7G7Qh1sGcC0_Lrt-0CL4`
             axios.get(newUrl).then(response => {
                 console.log(newUrl)
@@ -50,7 +50,7 @@ const Card = (props) => {
                 );
                 console.log("img api call made")
             });
-            console.log(props.weatherData);
+            console.log("in api img");
         }
 
         console.log("EFFECT ACTIVE")
@@ -58,8 +58,8 @@ const Card = (props) => {
 
             console.log("loopi")
         }
-        },[props.weatherData])
-    console.log(weatherDescription)
+        },[props.weatherData.currentTemp])
+    console.log(props.weatherData)
     return(
         <div style={bgImgInline}>
             {props.children}
