@@ -9,7 +9,6 @@
     margin: 3rem auto;
 }
 .info-wrapper h1{
-
     align-self: center;
 }
 .img-wrapper{
@@ -30,11 +29,9 @@
 }
 .img-wrapper img {
     width: 7rem;
-    /*background-color: blue;*/
     align-self: center;
 }
 .info{
-    /*background-color: cornflowerblue;*/
     display: flex;
     flex-direction: column;
     background: linear-gradient(to bottom, #000000 0%, rgba(255, 255, 255, 0.55) 0%, #a1a1a1 100%);
@@ -43,7 +40,6 @@
     border-radius: 40px 40px 40px 40px;
 }
 .info p {
-    /*background-color: rebeccapurple;*/
     padding: 0.2rem 0 0;
     align-self: center;
     font-weight: bold;
@@ -51,7 +47,6 @@
     border-bottom: black solid 0.1rem;
 }
 .info div {
-    /*background-color: #895f5f;*/
     padding: 0.2rem;
     align-self: center;
     font-weight: bold;
