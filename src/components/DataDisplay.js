@@ -3,6 +3,7 @@ import axios from "axios";
 import classes from "./styles/datadisplay.module.css";
 import Card from "./Card/Card";
 import CitySearch from "./CitySearch";
+import ForecastDisplay from "./ForecastDisplay";
 const DataDisplay = (props) => {
 
     const {cityName, setCitySearch} = props;
@@ -40,8 +41,9 @@ const DataDisplay = (props) => {
                         description: response.data.weather[0].description
                     }
                 );
+                console.log("call was made!");
             });
-            console.log("call was made!");
+
         }
 
     },[location.city, location.lat, location.lon, cityName])
@@ -72,6 +74,7 @@ const DataDisplay = (props) => {
                         <div>{weatherData.feels}&#176;F</div>
                     </div>
                 </div>
+                <ForecastDisplay cityName={weatherData.cityName}/>
             </Card>
             )
 }
