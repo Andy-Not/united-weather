@@ -38,7 +38,8 @@ const DataDisplay = (props) => {
                         minTemp: Math.round(response.data.main.temp_min),
                         feels: Math.round(response.data.main.feels_like),
                         humidity: Math.round(response.data.main.humidity),
-                        description: response.data.weather[0].description
+                        description: response.data.weather[0].description,
+                        coords: response.data.coord
                     }
                 );
                 console.log("call was made!");
@@ -74,7 +75,7 @@ const DataDisplay = (props) => {
                         <div>{weatherData.feels}&#176;F</div>
                     </div>
                 </div>
-                <ForecastDisplay cityName={weatherData.cityName}/>
+                <ForecastDisplay coords={weatherData.coords}/>
             </Card>
             )
 }
