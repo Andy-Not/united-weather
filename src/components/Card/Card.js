@@ -9,8 +9,13 @@ const Card = (props) => {
         backgroundImage:`url(${imgLinks.regular})`,
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
-        height: "100vh",
-        backgroundSize: "cover"
+        height: "100%",
+        width: "100%",
+        backgroundSize: "cover",
+        position: "fixed",
+        // overflow: "scroll",
+        // overflowX: "hidden",
+        // scrollbarWidth: "none"
     }
 
 

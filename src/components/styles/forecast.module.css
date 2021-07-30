@@ -1,0 +1,8 @@
+.forecast-wrapper{
+    background-color: white;
+    display: flex;
+}
+.days{
+    background-color: cornflowerblue;
+    width: 9rem;
+}
