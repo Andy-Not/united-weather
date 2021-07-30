@@ -75,7 +75,7 @@ const DataDisplay = (props) => {
                         <div>{weatherData.feels}&#176;F</div>
                     </div>
                 </div>
-                <ForecastDisplay coords={weatherData.coords}/>
+                <ForecastDisplay city={cityName} coords={weatherData.coords}/>
             </Card>
             )
 }
