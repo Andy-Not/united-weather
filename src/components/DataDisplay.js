@@ -4,8 +4,9 @@ import classes from "./styles/datadisplay.module.css";
 import Card from "./Card/Card";
 import CitySearch from "./CitySearch";
 import ForecastDisplay from "./ForecastDisplay";
+import Error from "./Error";
 const DataDisplay = (props) => {
-
+    const [errorMessage, setErrorMessage] = useState(null);
     const {cityName, setCitySearch} = props;
     const [weatherData, setWeatherData] = useState("");
     const [location, setLocation] = useState(
@@ -14,6 +15,17 @@ const DataDisplay = (props) => {
             lon: 0,
         }
     );
+    const errorHandle = (e) => {
+        console.log("got error");
+        if (e.response){
+            setErrorMessage("invalid city name")
+        }else if (e.request){
+            console.log("api seems to be having trouble try again later")
+        }else {
+            console.log("error" ,e.message)
+        }
+    }
+
     useEffect(() => {
 
         if (cityName === "" && location.lat === 0 && location.lon === 0){
@@ -43,12 +55,14 @@ const DataDisplay = (props) => {
                     }
                 );
                 console.log("call was made!");
-            });
+            }).catch(errorHandle);
 
         }
 
     },[location.city, location.lat, location.lon, cityName])
     return (
+        <>
+            {errorMessage && <Error message={errorMessage} setError={setErrorMessage}/>}
             <Card weatherData={weatherData}>
                 <CitySearch setCitySearch={setCitySearch}/>
                 <div className={classes["info-wrapper"]}>
@@ -77,6 +91,7 @@ const DataDisplay = (props) => {
                 </div>
                 <ForecastDisplay city={cityName} coords={weatherData.coords}/>
             </Card>
+        </>
             )
 }
 export default DataDisplay;
