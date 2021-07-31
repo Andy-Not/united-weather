@@ -8,7 +8,7 @@ const ForecastDisplay = (props) => {
  const [forecastData, setForecastData] = useState(null);
 
     useEffect(() => {
-        if ((!forecastData && props.coords) || props.coords){let newUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${props.coords.lat}&lon=${props.coords.lon}&exclude=minutely&appid=8d342f682d66b6e1370bc79bd312bcd2&units=imperial`;
+        if (props.coords){let newUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${props.coords.lat}&lon=${props.coords.lon}&exclude=minutely&appid=8d342f682d66b6e1370bc79bd312bcd2&units=imperial`;
             axios.get(newUrl).then(response => {
                 console.log(newUrl)
                 console.log(response.data)

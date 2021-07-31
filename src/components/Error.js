@@ -3,7 +3,7 @@ const Error = (props) => {
     const hideError = () => {
         props.setError(null)
     }
-    return(<Modal>
+    return(<Modal onClick={hideError}>
                 <div>{props.message}</div>
                 <button onClick={hideError}>OK</button>
             </Modal>)
