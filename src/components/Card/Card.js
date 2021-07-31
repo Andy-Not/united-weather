@@ -13,9 +13,9 @@ const Card = (props) => {
         width: "100%",
         backgroundSize: "cover",
         position: "fixed",
-        // overflow: "scroll",
-        // overflowX: "hidden",
-        // scrollbarWidth: "none"
+        overflow: "scroll",
+        overflowX: "hidden",
+        scrollbarWidth: "none"
     }
 
 
