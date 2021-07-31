@@ -13,9 +13,12 @@ const ForecastDisplay = (props) => {
             '& > *': {
                 margin: theme.spacing(0.5),
                 width: theme.spacing(16),
-                height: theme.spacing(16),
+                height: theme.spacing('auto'),
+                background: "#FFFFFF",
+                background: "linear-gradient(to bottom, #FFFFFF 0%, rgba(0, 0, 0, 0) 90%)"
             },
         },
+
     }));
 
  const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
@@ -40,11 +43,11 @@ const ForecastDisplay = (props) => {
 
     return(     <div className={classes.root}>
                         {forecastData ? forecastData.forecast.map(item => (
-                            <Paper key={Math.random()} elevation={3}>
-                                <div>{days[new Date(item.dt * 1000).getDay()]}</div>
-                                <div>Temp: {item.temp.day}</div>
-                                <div>High:{item.temp.max}</div>
-                                <div>Low:{item.temp.min}</div>
+                            <Paper className={classes.paper} key={Math.random()} elevation={3}>
+                                <div> <h3>{days[new Date(item.dt * 1000).getDay()]}</h3></div>
+                                <div>Temp: {Math.round(item.temp.day)}&#176;F</div>
+                                <div>High:{Math.round(item.temp.max)}&#176;F</div>
+                                <div>Low:{Math.round(item.temp.min)}&#176;F</div>
                             </Paper>)): ""}
                 </div>)
 }
