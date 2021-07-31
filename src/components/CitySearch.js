@@ -1,11 +1,13 @@
 import {useEffect, useRef, useState} from "react";
-import classes from "./styles/citysearch.module.css";
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import SearchIcon from '@material-ui/icons/Search';
-import Avatar from '@material-ui/core/Avatar';
+import React from "react";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import InputBase from "@material-ui/core/InputBase";
+import SearchIcon from "@material-ui/icons/Search";
+import useStyles from "./styles/navStyle";
 
 const CitySearch = (props) => {
+    const classes = useStyles();
     const [city, setCity] = useState("");
     const currentCity = useRef("");
 
@@ -22,14 +24,27 @@ const CitySearch = (props) => {
 
 
     return(
-        <form action="" onSubmit={submit}>
-            <div>
-                <TextField inputRef={currentCity} id="outlined-basic" label="City" variant="outlined" />
-                <Button style={{height: "3.5rem"}} type={"submit"}><SearchIcon/></Button>
-             </div>
-            <a className={classes.link} href="https://github.com/Andy-Not">
-                <Avatar className={classes.large} alt="Joandy Alejo garcia" src="https://avatars.githubusercontent.com/u/63996685?v=4" />
-            </a>
+        <form onSubmit={submit}>
+            <div className={classes.root}>
+                <AppBar position="static" style={{backgroundColor: "#B24085"}}>
+                    <Toolbar>
+                        <div className={classes.search}>
+                            <div className={classes.searchIcon}>
+                                <SearchIcon />
+                            </div>
+                            <InputBase
+                                inputRef={currentCity}
+                                placeholder="Search City"
+                                classes={{
+                                    root: classes.inputRoot,
+                                    input: classes.inputInput
+                                }}
+                                inputProps={{ "aria-label": "search" }}
+                            />
+                        </div>
+                    </Toolbar>
+                </AppBar>
+            </div>
         </form>
     )
 }

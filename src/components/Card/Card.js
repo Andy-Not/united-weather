@@ -6,16 +6,16 @@ const Card = (props) => {
     const weatherTypes = ["hot-chocolate","camp-fire","beach","sun"];
 
     let bgImgInline = {
-        backgroundImage:`url(${imgLinks.regular})`,
+        backgroundImage:`linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(120, 10, 93, 0.73)), url(${imgLinks.regular})`,
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
         height: "100%",
         width: "100%",
         backgroundSize: "cover",
         position: "fixed",
-        // overflow: "scroll",
-        // overflowX: "hidden",
-        // scrollbarWidth: "none"
+        overflow: "scroll",
+        overflowX: "hidden",
+        scrollbarWidth: "none"
     }
 
 
