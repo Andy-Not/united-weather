@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import classes from "./styles/datadisplay.module.css";
 import Card from "./Card/Card";
+import Paper from '@material-ui/core/Paper';
 import CitySearch from "./CitySearch";
 import ForecastDisplay from "./ForecastDisplay";
 import Error from "./Error";
@@ -67,27 +68,26 @@ const DataDisplay = (props) => {
                 <CitySearch setCitySearch={setCitySearch}/>
                 <div className={classes["info-wrapper"]}>
                     <h1>{weatherData.cityName}</h1>
-                    <div className={classes["img-wrapper"]}>
+                    <Paper className={classes["img-wrapper"]}>
                         <h3>{weatherData.description}</h3>
                         <img src={weatherData.icon} alt="img of weather"/>
-                    </div>
-                    <div className={classes.info} >
+                    </Paper>
+                    <Paper className={classes.info} >
                         <p>Current temperature</p>
                         <div>{weatherData.currentTemp}&#176;F</div>
-                    </div>
-                    <div className={classes.info} >
+                    </Paper>
+                    <Paper className={classes.info} >
                         <p>High</p>
                         <div>{weatherData.maxTemp}&#176;F</div>
-                    </div>
-                    <div className={classes.info} >
+                    </Paper>
+                    <Paper className={classes.info} >
                         <p>Low</p>
                         <div>{weatherData.minTemp}&#176;F</div>
-                    </div>
-
-                    <div className={classes.info} >
+                    </Paper>
+                    <Paper className={classes.info} >
                         <p>Feels like</p>
                         <div>{weatherData.feels}&#176;F</div>
-                    </div>
+                    </Paper>
                 </div>
                 <ForecastDisplay city={cityName} coords={weatherData.coords}/>
             </Card>
