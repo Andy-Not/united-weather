@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useEffect, useState, useCallback} from "react";
 import axios from "axios";
 import classes from "./styles/datadisplay.module.css";
 import Card from "./Card/Card";
@@ -16,6 +16,7 @@ const DataDisplay = (props) => {
             lon: 0,
         }
     );
+
     const errorHandle = (e) => {
         console.log("got error");
         if (e.response){
@@ -27,21 +28,17 @@ const DataDisplay = (props) => {
         }
     }
 
-    useEffect(() => {
-
-        if (cityName === "" && location.lat === 0 && location.lon === 0){
+    const fetchApi = useCallback(() => {
+        if (cityName === ""){
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(position => setLocation({lat:position.coords.latitude, lon:position.coords.longitude}));
             } else{
                 alert("not supported")
             }
         }
-
         if ((location.lat !== 0 && location.lon !== 0) || (cityName !== "" && location.lat === 0 && location.lon === 0)){
             let newUrl = `https://api.openweathermap.org/data/2.5/weather?${cityName !== "" ? "q=" + cityName : ""}${cityName === "" ? "&lat=" + location.lat  + "&lon=" + location.lon : "" }&appid=8d342f682d66b6e1370bc79bd312bcd2&units=imperial`;
             axios.get(newUrl).then(response => {
-                console.log(newUrl)
-                console.log(response.data)
                 setWeatherData(
                     {
                         cityName: response.data.name,
@@ -57,10 +54,13 @@ const DataDisplay = (props) => {
                 );
                 console.log("call was made!");
             }).catch(errorHandle);
-
         }
+    },[cityName, location.lon, location.lat])
 
-    },[location.city, location.lat, location.lon, cityName])
+    useEffect(() => {
+        fetchApi()
+    },[fetchApi])
+    
     return (
         <>
             {errorMessage && <Error message={errorMessage} setError={setErrorMessage}/>}
