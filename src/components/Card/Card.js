@@ -3,7 +3,7 @@ import {useEffect, useState, useCallback} from "react";
 const Card = (props) => {
     const [imgLinks, setImgLinks] = useState("");
     let bgImgInline = {
-        backgroundImage:`linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(120, 10, 93, 0.73)), url(${imgLinks.regular})`,
+        backgroundImage:`linear-gradient(to bottom, rgba(60,60,60, 0.52), rgba(120, 10, 93, 0.73)), url(${imgLinks.regular})`,
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
         height: "100%",
