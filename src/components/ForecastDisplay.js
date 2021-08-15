@@ -1,20 +1,25 @@
 import axios from "axios";
 import {useEffect, useState} from "react";
-import classes from "./styles/forecast.module.css";
+import style from "./styles/forecast.module.css";
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
+import Accordion from '@material-ui/core/Accordion';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
+import Typography from '@material-ui/core/Typography';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+
 const ForecastDisplay = (props) => {
 
     const useStyles = makeStyles((theme) => ({
         root: {
-            display: 'flex',
-            justifyContent: 'center',
-            flexWrap: 'wrap',
-            '& > *': {
-                margin: theme.spacing(0.5),
-                width: theme.spacing(16),
-                height: theme.spacing(16),
-            },
+            display: "flex",
+            flexDirection: "row",
+            width: '100%',
+        },
+        heading: {
+            fontSize: theme.typography.pxToRem(15),
+            fontWeight: theme.typography.fontWeightRegular,
         },
     }));
 
@@ -28,7 +33,7 @@ const ForecastDisplay = (props) => {
                 console.log(response.data)
                 setForecastData(
                     {
-                        forecast: response.data.daily
+                        forecast: response.data.daily.slice(1)
                     }
                 );
                 console.log("FORECAST CALL");
@@ -38,14 +43,28 @@ const ForecastDisplay = (props) => {
 
     const classes = useStyles();
 
-    return(     <div className={classes.root}>
-                        {forecastData ? forecastData.forecast.map(item => (
-                            <Paper key={Math.random()} elevation={3}>
-                                <div>{days[new Date(item.dt * 1000).getDay()]}</div>
-                                <div>Temp: {item.temp.day}</div>
-                                <div>High:{item.temp.max}</div>
-                                <div>Low:{item.temp.min}</div>
-                            </Paper>)): ""}
-                </div>)
+    return(
+        <div className={style.days}>
+        {forecastData ? forecastData.forecast.map(item => (
+            <div key={item.dt}>
+                <Accordion>
+                    <AccordionSummary
+                        expandIcon={<ExpandMoreIcon />}
+                        aria-controls="panel1a-content"
+                        id="panel1a-header"
+                    >
+                        <Typography className={classes.heading}>{days[new Date(item.dt * 1000).getDay()]} {new Date(item.dt * 1000).getDate()}</Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <Typography component={'span'}>
+                            <Paper>High:{Math.round(item.temp.max)}&#176;F</Paper>
+                            <Paper>Low:{Math.round(item.temp.min)}&#176;F</Paper>
+                        </Typography>
+                    </AccordionDetails>
+                </Accordion>
+            </div>)
+        ): ""}
+        </div>   )
+
 }
 export default ForecastDisplay;

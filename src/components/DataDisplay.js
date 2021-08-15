@@ -1,7 +1,8 @@
-import {useEffect, useState} from "react";
+import {useEffect, useState, useCallback} from "react";
 import axios from "axios";
 import classes from "./styles/datadisplay.module.css";
 import Card from "./Card/Card";
+import Paper from '@material-ui/core/Paper';
 import CitySearch from "./CitySearch";
 import ForecastDisplay from "./ForecastDisplay";
 import Error from "./Error";
@@ -15,6 +16,7 @@ const DataDisplay = (props) => {
             lon: 0,
         }
     );
+
     const errorHandle = (e) => {
         console.log("got error");
         if (e.response){
@@ -26,21 +28,17 @@ const DataDisplay = (props) => {
         }
     }
 
-    useEffect(() => {
-
-        if (cityName === "" && location.lat === 0 && location.lon === 0){
+    const fetchApi = useCallback(() => {
+        if (cityName === ""){
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(position => setLocation({lat:position.coords.latitude, lon:position.coords.longitude}));
             } else{
                 alert("not supported")
             }
         }
-
         if ((location.lat !== 0 && location.lon !== 0) || (cityName !== "" && location.lat === 0 && location.lon === 0)){
             let newUrl = `https://api.openweathermap.org/data/2.5/weather?${cityName !== "" ? "q=" + cityName : ""}${cityName === "" ? "&lat=" + location.lat  + "&lon=" + location.lon : "" }&appid=8d342f682d66b6e1370bc79bd312bcd2&units=imperial`;
             axios.get(newUrl).then(response => {
-                console.log(newUrl)
-                console.log(response.data)
                 setWeatherData(
                     {
                         cityName: response.data.name,
@@ -56,10 +54,13 @@ const DataDisplay = (props) => {
                 );
                 console.log("call was made!");
             }).catch(errorHandle);
-
         }
+    },[cityName, location.lon, location.lat])
 
-    },[location.city, location.lat, location.lon, cityName])
+    useEffect(() => {
+        fetchApi()
+    },[fetchApi])
+    
     return (
         <>
             {errorMessage && <Error message={errorMessage} setError={setErrorMessage}/>}
@@ -67,27 +68,26 @@ const DataDisplay = (props) => {
                 <CitySearch setCitySearch={setCitySearch}/>
                 <div className={classes["info-wrapper"]}>
                     <h1>{weatherData.cityName}</h1>
-                    <div className={classes["img-wrapper"]}>
+                    <Paper className={classes["img-wrapper"]}>
                         <h3>{weatherData.description}</h3>
                         <img src={weatherData.icon} alt="img of weather"/>
-                    </div>
-                    <div className={classes.info} >
+                    </Paper>
+                    <Paper className={classes.info} >
                         <p>Current temperature</p>
                         <div>{weatherData.currentTemp}&#176;F</div>
-                    </div>
-                    <div className={classes.info} >
+                    </Paper>
+                    <Paper className={classes.info} >
                         <p>High</p>
                         <div>{weatherData.maxTemp}&#176;F</div>
-                    </div>
-                    <div className={classes.info} >
+                    </Paper>
+                    <Paper className={classes.info} >
                         <p>Low</p>
                         <div>{weatherData.minTemp}&#176;F</div>
-                    </div>
-
-                    <div className={classes.info} >
+                    </Paper>
+                    <Paper className={classes.info} >
                         <p>Feels like</p>
                         <div>{weatherData.feels}&#176;F</div>
-                    </div>
+                    </Paper>
                 </div>
                 <ForecastDisplay city={cityName} coords={weatherData.coords}/>
             </Card>
